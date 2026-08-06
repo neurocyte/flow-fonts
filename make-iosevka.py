@@ -21,11 +21,15 @@ DEFAULT_VERSION = "34.8.0"
 
 # We want plain Iosevka only. Verify indexes with:
 #   ./make-iosevka.py --list
+#
+# Medium (500) and ExtraBold (800) rather than Regular/Bold: those are the
+# weights flow's fontweight/fontweight_bold_offset defaults resolve to, so the
+# built-in face matches a system-installed Iosevka out of the box.
 FACES = [
-    ("Regular", 0, "Iosevka-Regular.ttf"),
-    ("Regular", 3, "Iosevka-Italic.ttf"),
-    ("Bold", 0, "Iosevka-Bold.ttf"),
-    ("Bold", 3, "Iosevka-BoldItalic.ttf"),
+    ("Medium", 0, "Iosevka-Medium.ttf"),
+    ("Medium", 3, "Iosevka-MediumItalic.ttf"),
+    ("ExtraBold", 0, "Iosevka-ExtraBold.ttf"),
+    ("ExtraBold", 3, "Iosevka-ExtraBoldItalic.ttf"),
 ]
 
 # Do NOT pass --layout-features='*': that retains the ss/cv features and drags
@@ -111,6 +115,10 @@ def main():
         return
 
     os.makedirs(out_dir, exist_ok=True)
+    # Drop stale faces so a re-cut with different weights leaves nothing behind.
+    for stale in os.listdir(out_dir):
+        if stale.endswith(".ttf"):
+            os.remove(os.path.join(out_dir, stale))
     shutil.copyfile(license_path, os.path.join(out_dir, "LICENSE.md"))
 
     total = 0
