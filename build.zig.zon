@@ -6,6 +6,7 @@
 
     .paths = .{
         "noto-emoji-2.051",
+        "iosevka-34.8.0",
         "build.zig.zon",
     },
 }
