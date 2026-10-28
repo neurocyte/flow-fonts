@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch upstream Iosevka and cut down the four faces flow embeds.
+"""Fetch upstream Iosevka and cut down the six faces flow embeds.
 
 Flow embeds Iosevka as its built-in default and last-resort fallback, so the
 faces have to be small enough to live in every binary. Upstream ships them as
@@ -24,8 +24,11 @@ DEFAULT_VERSION = "34.8.0"
 #
 # Medium (500) and ExtraBold (800) rather than Regular/Bold: those are the
 # weights flow's fontweight/fontweight_bold_offset defaults resolve to, so the
-# built-in face matches a system-installed Iosevka out of the box.
+# built-in face matches a system-installed Iosevka out of the box. Light (300)
+# gives a lighter option for fontweight values below the default.
 FACES = [
+    ("Light", 0, "Iosevka-Light.ttf"),
+    ("Light", 3, "Iosevka-LightItalic.ttf"),
     ("Medium", 0, "Iosevka-Medium.ttf"),
     ("Medium", 3, "Iosevka-MediumItalic.ttf"),
     ("ExtraBold", 0, "Iosevka-ExtraBold.ttf"),
